@@ -1,19 +1,25 @@
-import { Menu } from "../menu/component";
+import { Outlet } from "react-router-dom";
 import { NewReviewFormContainer } from "../new-review-form/container";
-import { Reviews } from "../reviews/component";
+import { Tab } from "../tab/component";
 import styles from "./styles.module.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Restaurant = ({ restaurant }) => {
   const { id, name } = restaurant;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate(`menu`, { replace: true });
+  }, [navigate]); /* Доработать */
 
   return (
     <div className={styles.root}>
       <h2>{name}</h2>
-      <h3>Меню</h3>
-      <Menu restaurantId={id} />
-      <h3>Отзывы</h3>
+      <Tab to={`menu`} title={"Меню"}></Tab>
+      <Tab to={`reviews`} title={"Отзывы"}></Tab>
 
-      <Reviews restaurantId={id} />
+      <Outlet />
 
       <h3>Оставить новый отзыв</h3>
       <NewReviewFormContainer restaurantId={id} />
