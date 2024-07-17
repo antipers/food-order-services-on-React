@@ -1,20 +1,15 @@
 /* eslint-disable react/jsx-key */
 // eslint-disable-next-line no-unused-vars
 
-import { useState } from "react";
 import { RestaurantTabsContainer } from "../restaurant-tabs/container";
-import { RestaurantContainer } from "../restaurant/container";
+
+import { Outlet } from "react-router-dom";
 
 export const Restaurants = () => {
-  const [activeRestaurantId, setActiveRestaurantId] = useState();
-
   return (
     <div>
-      <RestaurantTabsContainer
-        onTabClick={setActiveRestaurantId}
-        activeRestaurantId={activeRestaurantId}
-      />
-      {activeRestaurantId && <RestaurantContainer id={activeRestaurantId} />}
+      <RestaurantTabsContainer />
+      <Outlet />
     </div>
   );
 };

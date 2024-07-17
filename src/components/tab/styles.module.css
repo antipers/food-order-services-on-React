@@ -1,0 +1,14 @@
+.root {
+  text-decoration: none;
+  color: black;
+  margin: 3px;
+  border: 5px;
+  border-color: black;
+  padding: 2px;
+}
+
+.disabled {
+  pointer-events: none;
+  color: darkmagenta;
+  font-weight: 900;
+}

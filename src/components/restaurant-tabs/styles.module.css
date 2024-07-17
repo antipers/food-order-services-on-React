@@ -1,0 +1,9 @@
+.root {
+  margin: 3px;
+  border: 5px;
+  border-color: black;
+  background-color: darkgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

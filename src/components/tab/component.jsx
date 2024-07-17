@@ -1,9 +1,19 @@
-import { Button } from "../button/component";
-
-export const Tab = ({ title, onClick, isActive }) => {
+import classNames from "classnames";
+import { NavLink } from "react-router-dom";
+import styles from "./styles.module.css";
+export const Tab = ({ title, to, }) => {
   return (
-    <Button onClick={onClick} disabled={isActive}>
-      {title}
-    </Button>
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        classNames(styles.root, {
+          [styles.disabled]: isActive,
+        })
+      }
+    >
+      {({ isActive }) =>
+        `${isActive ? ">>>" : ""}${title}${isActive ? "<<<" : ""}`
+      }
+    </NavLink>
   );
 };

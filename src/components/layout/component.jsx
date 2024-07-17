@@ -1,13 +1,16 @@
+import { Outlet } from "react-router-dom";
 import { Footer } from "../footer/component";
 import { Header } from "../header/component";
 
-export const Layout = ({ children }) => {
+export const Layout = () => {
   return (
     <div>
       <div id="modal" style={{ position: "relative", zIndex: "2" }}></div>
       <div style={{ zIndex: "1" }}>
-        <Header header={"I'm header"} />
-        <div>{children}</div>
+        <Header />
+        <div>
+          <Outlet />
+        </div>
         <Footer footer={"I'm footer"} />
       </div>
     </div>

@@ -3,15 +3,10 @@
 import { RestaurantTabs } from "./component";
 import { useGetRestaurantsQuery } from "../../redux/service/api/api";
 
-export const RestaurantTabsContainer = ({ onTabClick, activeRestaurantId }) => {
+export const RestaurantTabsContainer = () => {
   const { data: restaurants, isLoading } = useGetRestaurantsQuery();
+
   if (isLoading) return <div>Loading...</div>;
-  
-  return (
-    <RestaurantTabs
-      restaurants={restaurants}
-      onTabClick={onTabClick}
-      activeRestaurantId={activeRestaurantId}
-    />
-  );
+
+  return <RestaurantTabs restaurants={restaurants} />;
 };
