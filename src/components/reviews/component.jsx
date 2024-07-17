@@ -1,11 +1,14 @@
 /* eslint-disable react/jsx-key */
 
+import { useGetReviewsByRestaurantIdQuery } from "../../redux/service/api/api";
 import { ReviewContainer } from "../review/container";
 
-export const Reviews = ({ reviewId }) => {
-  if (!reviewId) {
-    return "Отзывы в процессе модерации";
+export const Reviews = ({ restaurantId }) => {
+
+  const {data: reviews, isFetching}= useGetReviewsByRestaurantIdQuery(restaurantId);
+  if (isFetching) {
+    return  <div>Loading...</div>
   }
 
-  return <ReviewContainer id={reviewId} />;
+  return <ReviewContainer reviews={reviews} />;
 };

@@ -1,38 +1,15 @@
 /* eslint-disable react/jsx-key */
 
-import { useSelector } from "react-redux";
 import { Dish } from "./component";
-import { selectDishCount } from "../../redux/ui/cart/selectors";
-import { useDispatch } from "react-redux";
-import { useCallback } from "react";
-import { decrement, increment } from "../../redux/ui/cart";
 
-export const DishContainer = ({ dishId, ...props }) => {
-  const dish = useSelector((state) => state.dish.entities[dishId]);
+import { useGetDishesByRestaurantIdQuery } from "../../redux/service/api/api";
 
-  const count = useSelector((state) => selectDishCount(state, dishId));
+export const DishContainer = ({ restaurantId, ...props }) => {
+  const { data: dishes, isFetching } =
+    useGetDishesByRestaurantIdQuery(restaurantId);
 
-  const dispatch = useDispatch();
-
-  const HandleIncrement = useCallback(
-    () => dispatch(increment(dishId)),
-    [dishId, dispatch]
-  );
-  const HandleDecrement = useCallback(
-    () => dispatch(decrement(dishId)),
-    [dishId, dispatch]
-  );
-
-  if (!dishId) {
-    return <div>НЕТ из контейнреа</div>;
+  if (isFetching) {
+    return <div>Loading...</div>;
   }
-  return (
-    <Dish
-      {...props}
-      dish={dish}
-      HandleIncrement={HandleIncrement}
-      HandleDecrement={HandleDecrement}
-      count={count}
-    />
-  );
+  return dishes.map((dish) => <Dish {...props} dish={dish} />);
 };
